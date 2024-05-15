@@ -1,0 +1,44 @@
+{
+    "name": "SAP-CAP-Plugin",
+    "version": "1.0.0",
+    "description": "A simple CAP project.",
+    "repository": "<Add your repository here>",
+    "license": "UNLICENSED",
+    "private": true,
+    "workspaces": [
+        "emojiplugin"
+    ],
+    "dependencies": {
+        "@cap-js/change-tracking": "^1.0.6",
+        "@sap/cds": "^7",
+        "@sap/cds-hana": "^2",
+        "@sap/xssec": "^3",
+        "emojiplugin": "*",
+        "express": "^4"
+    },
+    "devDependencies": {
+        "@cap-js/sqlite": "^1",
+        "@sap/cds-dk": "^7",
+        "@sap/ux-specification": "^1.120.10",
+        "copyfiles": "2.4.1",
+        "rimraf": "^3.0.2"
+    },
+    "scripts": {
+        "start": "cds-serve",
+        "dev": "cds watch --profile hybrid",
+        "hana": "cds deploy --to hana --profile hybrid --auto-undeploy",
+        "watch-catalogue": "cds watch --open catalogue/webapp/index.html?sap-ui-xx-viewCache=false",
+        "undeploy": "cf undeploy SAP-CAP-Plugin --delete-services --delete-service-keys --delete-service-brokers",
+        "build": "rimraf resources mta_archives && mbt build --mtar archive",
+        "deploy": "cf deploy mta_archives/archive.mtar --retries 1"
+    },
+    "cds": {
+        "requires": {
+            "db": "hana",
+            "auth": "xsuaa"
+        }
+    },
+    "sapux": [
+        "app/catalogue"
+    ]
+}

@@ -1,0 +1,13 @@
+@server=http://localhost:4004
+
+###
+GET {{server}}/app/Books
+Content-Type: application/json
+
+###
+PATCH {{server}}/app/Books/1
+Content-Type: application/json
+
+{
+    "title": "Wuthering Heights 3"
+}
